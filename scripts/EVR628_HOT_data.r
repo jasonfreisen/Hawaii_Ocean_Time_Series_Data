@@ -20,7 +20,7 @@ install.packages(c("usethis", "gitcreds"))
 
 
 ## Load data -------------------------------------------------------------------
-data <- read_excel("data/raw/EVR628_hot_data.xlsx")
+h_bacteria_data <- read_excel("data/raw/hot_raw_data.xlsx")
 
 # PROCESSING ###################################################################
 
