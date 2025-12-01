@@ -9,6 +9,7 @@ and used to determine average values recorded at each depth over a time-series.
 - `results/`: Output figures and tables
 ## Author
 [Jason Freisen, jaf3457@miami.edu]
-## Link to final HTML file
-file:///Users/jasonfreisen/Desktop/R%20Files/HOT_data/final_report.html
+
+[Link to my HTML file](final_report.html)
+
 
