@@ -81,7 +81,7 @@ bac <- readRDS("data/processed/new_bac_data.rds")
 chl <- readRDS("data/processed/new_chl_data.rds")
 ```
 
-Overall, The greatest number of bacteria was **`r max(bac$avg_bacteria)`/mL** at 
+Overall, the greatest number of bacteria was **`r max(bac$avg_bacteria)`/mL** at 
 **`r bac$depth_m[which(bac$avg_bacteria == max(bac$avg_bacteria))]` m** depth. The highest concentration of chlorophyll-a was **`r max(chl$avg_chlorophyll)` mg per cubic meter** at **`r chl$depth_m[which(chl$avg_chlorophyll == max(chl$avg_chlorophyll))]` m** depth
 
 # References
