@@ -1,0 +1,90 @@
+---
+title: "EVR628 Final Report"
+subtitle: "Overview and analysis of Hawaii Ocean Time Series data"
+author: "Jason Freisen"
+institute: "Rosenstiel School of Marine, Atmospheric, and Earth Science"
+format: html
+   
+---
+
+# Introduction
+
+The Hawaii Ocean Time‑series (HOT) is a long-term oceanographic research 
+program that organizes monthly cruises to a deep-ocean site, Station ALOHA, 
+north of Oʻahu, Hawaiʻi. The goal of this time-series program is to establish
+long-term records of physical, chemical and biological conditions for the North
+Pacific Subtropical Gyre, with the hopes of assessing natural variability 
+and human induced changes. Researches on HOT cruises collect wide ranges of 
+data, such as temperature, salinity, oxygen, carbon, primary productivity, and
+nutrient fluxes. Measurements are typically also collected at several different
+depths to compare relative concentrations of nutrients and biomass throughout
+the water column.
+
+![Station ALOHA in relation to the Hawaiian islands as seen on a depth raster 
+of the North Pacific Ocean](results/images/station_aloha_cr.png)
+
+# Objectives
+
+In this project, I sought to analyze primary productivity and heterotrophic 
+bacteria measurements collected from the time-series data. Since these 
+measurements were made at several depths during each cruise, I wanted to make 
+visualizations of vertical depth profiles in order to understand which ocean
+depths had the greatest amount of primary producers vs heterotrophic bacteria. 
+
+# Data Sources
+
+I used an online data base, Hawaii Ocean Time-series Data Organization and 
+Graphical System (HOT-DOGS), to download time-series data for heterotrophic
+bacteria and chlorophyll-a concentrations (used as an indicator for primary
+productivity). Both data of these data sets included variables such as data of 
+collection, collection start and end time, number of bacteria/concentration of 
+chl-a, and depth.Also, in order to create a map of Station ALOHA, I downloaded 
+a depth raster from GMED: Global Marine Environment Datasets for environment
+visualizations and species distribution modeling.
+
+# Data Processing
+
+In order to clean the data into a version better suited for my objectives, I 
+first read the raw data files (.xsls) into R studio and selected for the
+columns of interest: date, depth, and bacteria count/chl-a concentration.
+Next, I cleaned the names and converted the data format from yymmdd to mmddyyy, 
+which was easier to process the data. I then mutated a new column "year" to 
+easily visualize yearly fluctuations instead of monthly. Finally, I added a 
+column with the mean bacteria/chl-a for each year, and grouped by year and
+depth. My end result clean data only contained three columns: year, depth, and 
+average bacteria/chl-a. This allowed me to effectively create visualizations 
+for average measurements made each year in the time series at different depths.
+
+# Main Findings
+
+Based on my final visualizations I made for the data sets, I was able to make a 
+clear vertical profile of both heterotrophic bacteria and chlorophyll-a 
+concentrations. There is a peak in the chlorophyll concentration around 100m 
+depth, where as the heterotrophic bacteria are most prevalent at the surface 
+(0 - 50m depth). While the bacteria and chlorophyll both have yearly variations,
+there was no clear long-term trend over the ~25 year time frame. 
+
+![Measurements of heterotrophic bacteria and chlorophyll-a concentrations at 
+varying depths. Data observation year indicated by coloration](results/images/final_vertical_profile.png)
+
+![Yearly fluctuations of heterotrophic bacteria, broken down by each sample
+depth](results/images/bacteria_time_series.png)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+# Load packages
+library(tidyverse)
+# Load data
+bac <- readRDS("data/processed/new_bac_data.rds")
+chl <- readRDS("data/processed/new_chl_data.rds")
+```
+
+Overall, The greatest number of bacteria was **`r max(bac$avg_bacteria)`/mL** at 
+**`r bac$depth_m[which(bac$avg_bacteria == max(bac$avg_bacteria))]` m** depth. The highest concentration of chlorophyll-a was **`r max(chl$avg_chlorophyll)` mg per cubic meter** at **`r chl$depth_m[which(chl$avg_chlorophyll == max(chl$avg_chlorophyll))]` m** depth
+
+# References
+
+University of Hawaiʻi at Mānoa. (n.d.). HOT-DOGS: Hawaii Ocean Time-series Data 
+Organization & Graphical System. https://hahana.soest.hawaii.edu/hot/hot-dogs/
