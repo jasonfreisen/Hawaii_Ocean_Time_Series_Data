@@ -45,7 +45,7 @@ visualizations and species distribution modeling.
 # Data Processing
 
 In order to clean the data into a version better suited for my objectives, I 
-first read the raw data files (.xsls) into R studio and selected for the
+first read the raw data files (.xlsx) into R studio and selected for the
 columns of interest: date, depth, and bacteria count/chl-a concentration.
 Next, I cleaned the names and converted the data format from yymmdd to mmddyyy, 
 which was easier to process the data. I then mutated a new column "year" to 
